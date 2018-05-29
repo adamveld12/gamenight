@@ -18,7 +18,7 @@ RUN dpkg --add-architecture i386 \
     && groupadd -r steam \
     && useradd -m -s /bin/bash -g steam -G sudo steam \
     && echo "steam:steam" | chpasswd \
-    && mkdir -p /data/configs /games \
+    && mkdir -p /data/configs /data/logs /data/saves /games \
     && chown -R steam /data /games /home/steam/
 
 USER steam
@@ -34,4 +34,4 @@ RUN mkdir -p /home/steam/.steam/sdk32 /home/steam/steamcmd \
 
 VOLUME ["/data/configs"]
 
-ENTRYPOINT ./install.sh && /data/configs/configure.sh
+ENTRYPOINT /home/steam/install.sh && /data/configs/configure.sh

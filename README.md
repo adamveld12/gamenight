@@ -5,7 +5,6 @@ A bunch of containerized dedicated servers for games I play on the reg.
 - Upcoming Games
     - Arma 3 - 233780
     - Don't Starve Together - 343050
-    - Rust - 258550
     - Terraria - 105600
     - Stationeers - 600760 
     - Project Zomboid - 223250
@@ -60,6 +59,32 @@ JVM_MEMORY_SIZE=1024m // the memory allocation for the JVM see:  (https://minecr
 ```
 
 Create your `server.properties` and mount it in `/data/configs/`
+
+### Rust
+
+PORTS 28015/udp 28016/tcp 28017/tcp
+
+Create a server.cfg  and mount it in `/data/configs`.
+You can find a selection of config properties here: [https://developer.valvesoftware.com/wiki/Rust_Dedicated_Server#Server_Commands](https://developer.valvesoftware.com/wiki/Rust_Dedicated_Server#Server_Commands).
+
+Note: do not put the `+` in your server.cfg, see the example below:
+
+```
+server.ip 0.0.0.0
+server.port 28015
+rcon.ip 0.0.0.0
+rcon.port 28016
+rcon.web 0
+server.tickrate 10
+server.hostname "Your Server Name"
+server.identity "my_server_identity"
+server.maxplayers 50
+server.worldsize 3000
+server.seed 50000
+server.saveinterval 600
+rcon.password "YourPassword"
+```
+
 
 ### SteamCMD
 
