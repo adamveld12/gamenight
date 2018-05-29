@@ -27,4 +27,6 @@ COPY ./data /data
 #TCP:28017 // RC
 EXPOSE 28015/udp 28016/tcp 28017/tcp
 
+VOLUME ["/data/saves", "/data/configs"]
+
 ENTRYPOINT /home/rust/run.sh

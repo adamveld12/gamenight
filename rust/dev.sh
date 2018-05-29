@@ -5,6 +5,8 @@ docker build -t r .
 docker run -it --rm \
   -v $PWD/run.sh:/home/rust/run.sh \
   -v $PWD/data/configs/server.cfg:/data/configs/server.cfg \
+  -v $PWD/data/saves/:/data/saves/ \
+  --name rustds \
   --entrypoint bash \
   -p 28015:28015/udp \
   -p 28015:28015/tcp \

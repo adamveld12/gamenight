@@ -14,7 +14,7 @@ do
   fi
 done
 
-mkdir -p /data/logs
+ln -s /data/saves /games/${APPID}/server
 
 cd /games/${APPID}
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`dirname $0`/RustDedicated_Data/Plugins/x86_64
