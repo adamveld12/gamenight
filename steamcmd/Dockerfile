@@ -1,8 +1,9 @@
 FROM debian:8-slim
 
+ENV APPID=0
 ENV STEAMUSER="anonymous"
 ENV STEAMPASS=""
-ENV APPID=
+ENV STEAMGUARD=""
 
 RUN dpkg --add-architecture i386 \
     && apt-get update \

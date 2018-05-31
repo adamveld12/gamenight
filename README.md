@@ -38,6 +38,17 @@ For the most part all of these follow some a similar pattern:
 
 - If you don't have access to config files I've included defaults in the images so you can use them as reference
 
+### Arma 3
+
+PORTS 2302/udp 2302/udp 2303/udp 2304/udp 2305/udp 2306/udp
+
+```
+SERVER_ARGS= # extra command line arguments you would like to pass to the arma3server executable
+```
+
+Multiplayer missions should be added to `/data/mpmissions`. Mods should go to `/data/mods` and must have the `SERVER_ARGS` environment variable setup to load the mods (using the -mod switch) as specified here: [https://community.bistudio.com/wiki/ArmA:_Server_configuration#Linux](https://community.bistudio.com/wiki/ArmA:_Server_configuration#Linux)
+
+
 ### Factorio
 
 PORTS 34197/udp
@@ -91,10 +102,15 @@ rcon.password "YourPassword"
 
 Useful for using as a base image for any game using steam. The entrypoint by default installs the specified APPID with steamcmd and then runs `/data/configs/configure.sh` which can then be used to launch the game or whatever else.
 
+Make sure to make an extra steam account that you uses specifically for dedicated servers, so your account cannot be compromised.
+
+For security reasons the `/home/steam/install.sh` logs out steamcmd after executing if you authenticate with steam guard. If you need to do some steamcmd workflows that don't align with how the `install.sh` works you should use steamcmd directly at `/home/steam/steamcmd/steamcmd.sh`.
+
 ```
 # the user name/pass used to authenticate with steam, some games require this before you can download the dedicated server executable
 STEAMUSER="anonymous" 
-STEAMPASS=""            
+STEAMPASS=""
+STEAMGUARD=""  # steam guard verification token - I recommend running the install once so the email is sent and then running again with this env var set with the token to get this to work
 
 APPID=<undefined>     # the app to install - see list of dedication server app IDs here: (https://developer.valvesoftware.com/wiki/Dedicated_Servers_List)
 ```
