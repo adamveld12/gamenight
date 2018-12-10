@@ -1,10 +1,8 @@
 #!/bin/bash
 
-
 ln -s /data/missions /games/${APPID}/mpmissions
 
-/games/${APPID}/arma3server -netlog \
-                            -name=server \
+/games/${APPID}/arma3server -name=server \
                             -profiles=/data/profiles \
                             -cfg=/data/configs/basic.cfg \
                             -config=/data/configs/server.cfg \

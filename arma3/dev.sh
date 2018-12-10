@@ -8,7 +8,9 @@ docker run -it --rm \
   -v $PWD/data/saves/:/data/saves/ \
   --name arma3 \
   --entrypoint bash \
-  -p 28015:28015/udp \
-  -p 28015:28015/udp \
-  -p 28016:28016/udp \
-  -p 28017:28017/udp arma3
+  -p 2302:2302/udp \
+  -p 2303:2303/udp \
+  -p 2304:2304/udp \
+  -p 2305:2305/udp \
+  -p 2306:2306/udp \
+  arma3
