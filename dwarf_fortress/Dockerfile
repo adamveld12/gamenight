@@ -16,6 +16,7 @@ RUN apt-get update \
     libgcc1 \
     libglib2.0-0 \
     libglu1-mesa \
+    libopenal1 \
     libsdl-image1.2 \
     libsdl-ttf2.0-0 \
     libstdc++6 \
