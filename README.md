@@ -4,6 +4,7 @@ A bunch of containerized dedicated servers for games I play on the reg.
 
 - Upcoming Games
     - Arma 3 - 233780
+    - Dwarf Fortress (not MP but I still love it)
     - Don't Starve Together - 343050
     - Terraria - 105600
     - Stationeers - 600760 
@@ -99,6 +100,12 @@ APPID=<undefined>     # the app to install - see list of dedication server app I
 ```
 
 You can overwrite the `/data/configs/configure.sh` to run custom commands such as installing games or setting up complex things. This should not be necessary in the other images though
+
+
+## Dwarf Fortress
+
+Easy, just run it. Saves are `/games/df/data/save`.
+
 
 ## License
 
