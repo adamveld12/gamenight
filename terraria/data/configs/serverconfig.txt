@@ -1,0 +1,34 @@
+#Sets the max number of players allowed on a server. Value must be between 1 and 255
+maxplayers=8
+
+#Set the port number
+port=7777
+
+#Set the server password
+password=
+#Set the message of the day
+motd=Please don’t cut the purple trees! 
+
+#Sets the folder where world files will be stored
+worldpath=/data/saves/worlds/
+
+#Load a world and automatically start the server.
+world=/data/saves/worlds/world1.wld
+
+#Creates a new world if none is found. World size is specified by: 1(small), 2(medium), and 3(large).
+autocreate=2
+
+#Sets world difficulty when using -autocreate. Options: 0(normal), 1(expert)
+difficulty=0
+
+#Sets the name of the world when using autocreate
+worldname=World
+
+#The location of the banlist. Defaults to "banlist.txt" in the working directory.
+banlist=/data/configs/banlist.txt
+
+#Adds additional cheat protection.
+secure=1
+
+#Sets the server language from its language code.  en/US = English de/DE = German it/IT = Italian fr/FR = French es/ES = Spanish ru/RU = Russian zh/Hans = Chinese pt/BR = Portuguese pl/PL = Polish
+language=en/US

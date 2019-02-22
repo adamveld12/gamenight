@@ -4,9 +4,7 @@ A bunch of containerized dedicated servers for games I play on the reg.
 
 - Upcoming Games
     - Arma 3 - 233780
-    - Dwarf Fortress (not MP but I still love it)
     - Don't Starve Together - 343050
-    - Terraria - 105600
     - Stationeers - 600760 
     - Project Zomboid - 223250
     - Killing Floor - 222860
@@ -28,8 +26,7 @@ For the most part all of these follow some a similar pattern:
     |__<game_name>/ <- executables and game install lives here
 ```
 
-- There is a linux user named after tha specified game (IE for Factorio there is a factorio user)
-
+- There is a linux user and group named after the specified game (IE for Factorio there is a factorio user)
 - All of the configuration files should get mounted into `/data/configs`
 
 - All containers have configs with sane defaults which should allow you to launch them without configuration
@@ -86,6 +83,15 @@ server.saveinterval 600
 rcon.password "YourPassword"
 ```
 
+### Terraria
+
+PORT 7777/tcp
+
+- Mount configs at `/data/configs`
+
+- Saves are stored at `/data/saves`
+
+- An example config is located at `/data/configs/serverconfig.example.txt`, you can pass config options to the container as parameters. The list of available parameters can be found [here](https://terraria.gamepedia.com/Server#Command_line_parameters)
 
 ### SteamCMD
 
@@ -94,7 +100,7 @@ Useful for using as a base image for any game using steam. The entrypoint by def
 ```
 # the user name/pass used to authenticate with steam, some games require this before you can download the dedicated server executable
 STEAMUSER="anonymous" 
-STEAMPASS=""            
+STEAMPASS=""
 
 APPID=<undefined>     # the app to install - see list of dedication server app IDs here: (https://developer.valvesoftware.com/wiki/Dedicated_Servers_List)
 ```
