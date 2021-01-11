@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: |
+        docker login adamveld12 ${DOCKER_PASSWORD}
+        ./build.sh
+
+    # - name: Build and push steamcmd
+    #   uses: docker/build-push-action@v2.3.0
+    #   with:
+    #     context: ./steamcmd
+    #     file: ./steamcmd/Dockerfile
+    #     labels: 
+    #       - maintainer="adam@vdhsn.com"
+    #     tags: 
+    #       - 1.0.0
+    #       - latest
+    #     pull: true
+    #     no-cache: false
