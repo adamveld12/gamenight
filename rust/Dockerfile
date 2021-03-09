@@ -1,4 +1,4 @@
-FROM gamenight/steamcmd:1.0.0
+FROM gamenight/steamcmd:1.2.0
 
 ENV APPID=258550
 
