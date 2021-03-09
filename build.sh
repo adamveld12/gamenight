@@ -9,7 +9,7 @@ function build(){
   docker push ${imageName}
 }
 
-TAG="1.1.0-a"
+TAG="1.2.0"
 
 for D in */; do
   echo "~~~~~BUILDING $D~~~~~~"

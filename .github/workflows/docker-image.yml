@@ -12,20 +12,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       env:
+        STEAM_USER: anonymous
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         docker login -u adamveld12 -p ${DOCKER_PASSWORD}
         ./build.sh
-
-    # - name: Build and push steamcmd
-    #   uses: docker/build-push-action@v2.3.0
-    #   with:
-    #     context: ./steamcmd
-    #     file: ./steamcmd/Dockerfile
-    #     labels: 
-    #       - maintainer="adam@vdhsn.com"
-    #     tags: 
-    #       - 1.0.0
-    #       - latest
-    #     pull: true
-    #     no-cache: false

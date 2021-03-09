@@ -17,7 +17,6 @@ RUN useradd -m -s /bin/bash -g steam dontstarve \
 
 USER dontstarve
 WORKDIR /home/dontstarve
-RUN touch /data/saves/test.txt
 
 COPY --chown=dontstarve:steam ./data/ /data/
 COPY --chown=dontstarve:steam ./run.sh /home/dontstarve/run.sh
