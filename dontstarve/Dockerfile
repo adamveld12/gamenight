@@ -21,9 +21,9 @@ WORKDIR /home/dontstarve
 COPY --chown=dontstarve:steam ./data/ /data/
 COPY --chown=dontstarve:steam ./run.sh /home/dontstarve/run.sh
 
-VOLUME ["/data/saves", "/data/configs", "/data/logs"]
+VOLUME ["/data"]
 
 EXPOSE 10999/udp
 
 
-ENTRYPOINT [ "/home/dontstarve/run.sh" ]
+ENTRYPOINT [ "/home/dontstarve/run.sh", "-lan", "-console" ]
