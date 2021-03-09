@@ -32,6 +32,4 @@ RUN mkdir -p /home/steam/.steam/sdk32 /home/steam/steamcmd \
     && echo quit | /home/steam/steamcmd/steamcmd.sh \
     && ln -s /home/steam/steamcmd/linux32/steamclient.so /home/steam/.steam/sdk32/steamclient.so
 
-VOLUME ["/data/configs", "/data/saves", "/data/logs"]
-
 ENTRYPOINT /home/steam/install.sh && /data/configs/configure.sh
