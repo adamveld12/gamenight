@@ -14,7 +14,7 @@ jobs:
       env:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        docker login adamveld12 -p ${DOCKER_PASSWORD}
+        docker login -u adamveld12 -p ${DOCKER_PASSWORD}
         ./build.sh
 
     # - name: Build and push steamcmd
