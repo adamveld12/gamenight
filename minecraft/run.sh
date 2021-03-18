@@ -1,16 +1,14 @@
 #!/bin/ash
-if [ -d '/data/saves/world' ]; then
-  echo "found previous save at /data/saves/world....";
-else
-  mkdir -p /data/saves/world/
-fi
+mkdir -p '/data/logs'
+mkdir -p '/data/world'
 
-cat <<EOF > ./eula.txt
+cat <<EOF > /games/minecraft/eula.txt
 #By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula).
 eula=true
 EOF
 
-ln -s /data/configs/server.properties server.properties
-ln -s /data/saves/world/ world
+ln -s /games/minecraft/eula.txt /data/eula.txt
 
-java -Xmx${JVM_MEMORY_SIZE} -Xms${JVM_MEMORY_SIZE} -jar server.jar nogui
+cd /data
+exec java -Xmx${JVM_MEMORY_SIZE} -Xms512m \
+          -jar /games/minecraft/server.jar --nogui 
