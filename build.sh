@@ -1,16 +1,23 @@
 #!/bin/bash
-function build(){
+function build() {
   local buildDir=$1;
   local imageName=$2;
-  local dockerfile=${3:-Dockerfile};
+  local df=$3;
+
+  if [ -z "${df}" ]; then
+    dockerfile = "Dockerfile";
+  fi
 
   echo "Building ${imageName}"
-  docker build --build-arg STEAM_USER=${STEAMUSER} --build-arg STEAM_PASS=${STEAMPASS} -t ${imageName} -f ${dockerfile} ./${buildDir}
+  docker build --build-arg STEAM_USER=${STEAMUSER} --build-arg STEAM_PASS=${STEAMPASS} \
+              -t ${imageName} \
+              -f "${df}" \
+              ./${buildDir}
+
   docker push -q ${imageName}
 }
 
-TAG="1.2.0"
-
+TAG="1.2.1"
 build ./steamcmd "gamenight/steamcmd:${TAG}";
 build ./dontstarve "gamenight/dontstarve:${TAG}" &
 build ./minecraft "gamenight/minecraft:1.16.5" &
