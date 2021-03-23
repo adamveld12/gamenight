@@ -1,4 +1,6 @@
 #!/bin/bash
+export BRANCH=$GITHUB_REF
+
 function build() {
   local buildDir=$1;
   local imageName=$2;
@@ -15,7 +17,7 @@ function build() {
               -f "${buildDir}/${df}" \
               ${buildDir};
 
-  if [ "${BRANCH}" = "master" ]; then
+  if [ "${BRANCH}" = "/refs/head/master" ]; then
     docker tag "${imageName}:${tag}" "${imageName}:latest";
   fi
 
