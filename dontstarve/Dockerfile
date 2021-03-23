@@ -1,6 +1,8 @@
 FROM gamenight/steamcmd:1.2.0
 
 ENV APPID=343050
+ENV CLUSTER_NAME=default
+ENV SHARD_NAME=Master
 
 RUN /home/steam/install.sh
 
@@ -20,10 +22,11 @@ WORKDIR /home/dontstarve
 
 COPY --chown=dontstarve:steam ./data/ /data/
 COPY --chown=dontstarve:steam ./run.sh /home/dontstarve/run.sh
+COPY --chown=dontstarve:steam ./data/clusters/ /data/clusters/
 
 VOLUME ["/data"]
 
 EXPOSE 10999/udp
 
 
-ENTRYPOINT [ "/home/dontstarve/run.sh", "-lan", "-console" ]
+ENTRYPOINT [ "/home/dontstarve/run.sh", "-bind_ip 0.0.0.0", "-console"]

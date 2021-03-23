@@ -1,0 +1,34 @@
+FROM openjdk:8-jre-alpine3.7
+
+LABEL maintainer=adam@vdhsn.com
+
+ARG version=1.16.5
+ARG revision=564
+
+ENV MINECRAFT_VERSION=${version}
+ENV PAPER_VERSION=${version}-${revision}
+ENV JAVA_OPTS="-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
+ENV PATH=${PATH}:/usr/lib/jvm/default-java/bin
+ENV JVM_MEMORY_SIZE=1024m
+ENV MINECRAFT_PLUGINS="https://github.com/mcMMO-Dev/mcMMO/releases/download/2.0.0/mcMMO.jar"
+
+
+ADD https://papermc.io/api/v2/projects/paper/versions/${MINECRAFT_VERSION}/builds/564/downloads/paper-${MINECRAFT_VERSION}-${revision}.jar /games/minecraft/server.jar
+
+WORKDIR /data
+
+RUN addgroup minecraft \
+    && adduser -D -G minecraft minecraft \
+    && mkdir -p /games/minecraft /data \
+    && chown -cR minecraft:minecraft /games /data
+
+COPY --chown=minecraft:minecraft ./run.sh /games/minecraft/
+COPY --chown=minecraft:minecraft ./data/configs/server.properties /games/minecraft/server.properties.example
+
+USER minecraft
+
+EXPOSE 25565 25575
+
+VOLUME /data
+
+ENTRYPOINT /games/minecraft/run.sh
