@@ -12,22 +12,22 @@ COPY ./run.sh /games/terraria/run.sh
 COPY ./generate_config.sh /games/terraria/generate_config.sh
 
 RUN apt-get update \
-      && apt-get install -y unzip \
-      && apt-get clean
+  && apt-get install -y unzip \
+  && apt-get clean
 
 RUN  unzip ../terraria.zip \
   && cp -R ${VERSION}/Linux/* /games/terraria \
   && rm -rf ${VERSION} terraria.zip
 
 RUN groupadd terraria \
-    && useradd -d /games/terraria -g terraria -u 1000 -o -s /bin/bash terraria \
-    && mkdir -p /games/terraria /data \
-    && chmod +x /games/terraria/run.sh /games/terraria/TerrariaServer.bin.* \
-    && chown -cR terraria /games /data
+  && useradd -d /games/terraria -g terraria -u 1000 -o -s /bin/bash terraria \
+  && mkdir -p /games/terraria /data \
+  && chmod +x /games/terraria/run.sh /games/terraria/TerrariaServer.bin.* \
+  && chown -cR terraria /games /data
 
 USER terraria
 
-VOLUME ['/data/saves', '/data/configs']
+VOLUME ["/data/saves", "/data/configs"]
 
 EXPOSE 7777
 
