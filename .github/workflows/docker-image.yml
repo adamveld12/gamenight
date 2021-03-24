@@ -31,6 +31,19 @@ jobs:
         source ./build.sh
         build dontstarve ${SHA}
 
+  valheim:
+    runs-on: ubuntu-latest
+    needs: [steamcmd]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build valheim
+      env:
+        STEAM_USER: anonymous
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        source ./build.sh
+        build valheim ${SHA}
+
   minecraft:
     runs-on: ubuntu-latest
     steps:
