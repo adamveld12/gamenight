@@ -4,7 +4,7 @@ export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH
 export SteamAppID=892970
 
 export ispub="0"
-if [ -z "${VH_PUBLIC}" ]; then
+if [ "${VH_PUBLIC}" = "1" ]; then
     ispub="1"
 fi
 

@@ -3,6 +3,11 @@ FROM gamenight/steamcmd:1.2.0
 ENV APPID=896660
 ENV LD_LIBRARY_PATH=/games/${APPID}/linux64:$LD_LIBRARY_PATH
 
+ENV VH_SERVER_NAME="Valheim Docker"
+ENV VH_WORLD="World"
+ENV VH_PASSWORD=""
+ENV VH_PUBLIC="1"
+
 RUN /home/steam/install.sh
 
 USER root
