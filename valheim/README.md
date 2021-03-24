@@ -5,8 +5,8 @@ Dedicated server for Valheim
 Environment variables
 
 - `VH_SERVER_NAME`: Sets the name that will be visible in the server list
+- `VH_SERVER_PASSWORD`: The server password
 - `VH_WORLD`: creates or loads a world with the specified name.
-- `VH_PASSWORD`: The server password
 - `VH_PUBLIC`: Visibility of the server, if set to `1` the server will be visible in the server browser
 
 Ports

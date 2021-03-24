@@ -9,9 +9,9 @@ if [ "${VH_PUBLIC}" = "1" ]; then
 fi
 
 echo "Starting server PRESS CTRL-C to exit"
-./valheim_server.x86_64 -port 2456 -nographics -batchmode \
+/games/${APPID}/valheim_server.x86_64 -port 2456 -nographics -batchmode \
 -savedir /data \
 -name "${VH_SERVER_NAME}" \
+-password "${VH_SERVER_PASSWORD}" \
 -world "${VH_WORLD}" \
--password "${VH_PASSWORD}" \
 -public "${ispub}"
