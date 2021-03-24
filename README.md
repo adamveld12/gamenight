@@ -1,11 +1,13 @@
 # Game Night
 
+[![Docker Image CI](https://github.com/adamveld12/gamenight/actions/workflows/docker-image.yml/badge.svg)](https://github.com/adamveld12/gamenight/actions/workflows/docker-image.yml)
+
 A bunch of containerized dedicated servers for games I play on the reg.
 
 - Upcoming Games
     - Arma 3 - 233780
     - Don't Starve Together - 343050
-    - Stationeers - 600760 
+    - Stationeers - 600760
     - Project Zomboid - 223250
     - Killing Floor - 222860
 
@@ -31,7 +33,7 @@ For the most part all of these follow some a similar pattern:
 
 - All containers have configs with sane defaults which should allow you to launch them without configuration
 
-- You should be able to simply run the containers, export the proper ports and everything will run without much else required 
+- You should be able to simply run the containers, export the proper ports and everything will run without much else required
 
 - If you don't have access to config files I've included defaults in the images so you can use them as reference
 
@@ -43,7 +45,7 @@ PORTS 34197/udp
 DEFAULT_SAVE_FILE=game_save // the game save file name, this save file is based in /data/saves
 ```
 
-If the startup script sees a save file with a name matching the env var `DEFAULT_SAVE_FILE` it will tell the server to load it 
+If the startup script sees a save file with a name matching the env var `DEFAULT_SAVE_FILE` it will tell the server to load it
 instead of generating a new one.
 
 Mods can be copied into `/data/mods/` and the server will pick them up at launch
@@ -99,7 +101,7 @@ Useful for using as a base image for any game using steam. The entrypoint by def
 
 ```
 # the user name/pass used to authenticate with steam, some games require this before you can download the dedicated server executable
-STEAMUSER="anonymous" 
+STEAMUSER="anonymous"
 STEAMPASS=""
 
 APPID=<undefined>     # the app to install - see list of dedication server app IDs here: (https://developer.valvesoftware.com/wiki/Dedicated_Servers_List)
