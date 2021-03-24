@@ -1,11 +1,15 @@
 #!/bin/bash
-export BRANCH=$GITHUB_REF
+export BRANCH=$GITHUB_REF;
+export SHA=$(git rev-parse --short=6 HEAD);
+
+docker login -u adamveld12 -p ${DOCKER_PASSWORD}
 
 function build() {
   local buildDir=$1;
-  local imageName=$2;
-  local tag=$3;
-  local df=$4;
+  local tag=$2;
+  local df=$3;
+
+  local imageName="gamenight/${buildDir}"
 
   if [ -z "$df" ]; then
     df="Dockerfile";
@@ -13,6 +17,8 @@ function build() {
 
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuilding '${imageName}'\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   docker build --build-arg "STEAM_USER=${STEAMUSER}" --build-arg "STEAM_PASS=${STEAMPASS}" \
+              --label "maintainer=adam@vdhsn.com" \
+              --label "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
               -t "${imageName}:${tag}" \
               -f "${buildDir}/${df}" \
               ${buildDir};
@@ -23,16 +29,3 @@ function build() {
 
   docker push -a -q ${imageName};
 }
-
-TAG="1.2.1"
-build ./steamcmd "gamenight/steamcmd" "${TAG}";
-build ./dontstarve "gamenight/dontstarve" "${TAG}" &
-build ./minecraft "gamenight/minecraft" "1.16.5" &
-build ./minecraft "gamenight/minecraft" "1.16.5-paper" "Dockerfile.paper" &
-build ./terraria "gamenight/terraria" "1353" &
-build ./factorio "gamenight/factorio" "stable" &
-build ./rust "gamenight/rust" "stable" &
-
-time wait;
-
-echo "done"

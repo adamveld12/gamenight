@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
 jobs:
-  build:
+  steamcmd:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -15,8 +15,54 @@ jobs:
         STEAM_USER: anonymous
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        docker login -u adamveld12 -p ${DOCKER_PASSWORD}
-        TAG=$(git rev-parse --short=6 HEAD)
-        docker build -t gamenight/steamcmd:${TAG} ./steamcmd
-        docker tag gamenight/steamcmd:${TAG} gamenight/steamcmd:latest
-        docker push -a gamenight/steamcmd
+        source ./build.sh
+        build steamcmd ${SHA}
+
+  dontstarve:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build dontstarve
+      env:
+        STEAM_USER: anonymous
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        source ./build.sh
+        build dontstarve ${SHA}
+
+  minecraft:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build minecraft
+      env:
+        STEAM_USER: anonymous
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        source ./build.sh
+        build minecraft 1.16.5
+
+  terraria:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build terraria
+      env:
+        STEAM_USER: anonymous
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        source ./build.sh
+        build terraria 1353
+
+  factorio:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build factorio
+      env:
+        STEAM_USER: anonymous
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        source ./build.sh
+        build factorio stable
+        build factorio ${SHA}
