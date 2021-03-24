@@ -23,7 +23,7 @@ function build() {
               -f "${buildDir}/${df}" \
               ${buildDir};
 
-  if [ "${BRANCH}" = "/refs/head/master" ]; then
+  if [ "${BRANCH}" = "refs/head/master" ]; then
     docker tag "${imageName}:${tag}" "${imageName}:latest";
   fi
 
