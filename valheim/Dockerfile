@@ -1,9 +1,11 @@
 FROM gamenight/steamcmd:1.2.0
 
 ENV APPID=896660
-ENV LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/games/${APPID}/linux64:$LD_LIBRARY_PATH
 
 RUN /home/steam/install.sh
+
+USER root
 
 RUN useradd -m -s /bin/bash -g steam valheim \
     && echo "valheim:valheim" | chpasswd \
@@ -14,6 +16,8 @@ RUN useradd -m -s /bin/bash -g steam valheim \
 USER valheim
 
 COPY --chown=valheim:steam ./run.sh /home/valheim
+
+WORKDIR /games/${APPID}/
 
 VOLUME ["/data"]
 
