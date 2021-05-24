@@ -1,12 +1,12 @@
 FROM debian:9.6-slim
 
-ARG VERSION=1353
+ARG VERSION=1423
 
 ENV VERSION=${VERSION}
 
 WORKDIR /games/terraria
 
-ADD https://terraria.org/server/terraria-server-${VERSION}.zip /games/terraria.zip
+ADD https://terraria.org/system/dedicated_servers/archives/000/000/046/original/terraria-server-${VERSION}.zip /games/terraria.zip
 COPY ./data /data
 COPY ./run.sh /games/terraria/run.sh
 COPY ./generate_config.sh /games/terraria/generate_config.sh
