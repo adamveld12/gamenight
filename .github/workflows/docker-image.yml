@@ -68,7 +68,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         source ./build.sh
-        build terraria 1353
+        build terraria 1423
 
   factorio:
     runs-on: ubuntu-latest
