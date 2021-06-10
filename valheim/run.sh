@@ -8,7 +8,7 @@ if [ "${VH_PUBLIC}" = "1" ]; then
     ispub="1"
 fi
 
-export _PASSWORD_ARG="-password \"${VH_SERVER_PASSWORD}\""
+export _PASSWORD_ARG="-password ${VH_SERVER_PASSWORD}"
 if [[ -z "${VH_SERVER_PASSWORD}" ]]; then
     _PASSWORD_ARG="-password"
 fi
