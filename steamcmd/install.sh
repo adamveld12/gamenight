@@ -1,16 +1,20 @@
 #!/bin/bash
-if [[ -z $STEAMUSER ]]; then
-  export STEAMUSER="anonymous"
-  export STEAMPASS=""
+
+export APP_COMMAND="+force_install_dir /games/$APPID/ +app_update $APPID validate"
+if [[ -z "$APPID" ]]; then
+  APP_COMMAND=""
 fi;
 
-if [[ -z $APPID ]]; then
-  echo "An APPID environment variable must be defined";
-  exit 1
+if [[ -z "$STEAM_USER" ]]; then
+  export STEAM_USER="anonymous";
+  export STEAM_PASS="";
 fi;
 
-/home/steam/steamcmd/steamcmd.sh \
-      +login $STEAMUSER $STEAMPASS \
-      +force_install_dir /games/$APPID/ \
-      +app_update $APPID validate \
-      +exit;
+export LOGIN_COMMAND="";
+if [[ -z "$NO_LOGIN" ]]; then
+  export LOGIN_COMMAND="+login $STEAM_USER $STEAM_PASS $STEAM_GUARD";
+fi;
+
+exec /home/steam/Steam/steamcmd.sh \
+      +@sSteamCmdForcePlatformType linux \
+      ${LOGIN_COMMAND} ${APP_COMMAND} +exit;

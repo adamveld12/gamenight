@@ -1,26 +1,31 @@
-FROM gamenight/steamcmd:1.2.0
+FROM gamenight/steamcmd:latest AS download
+
 
 ENV APPID=896660
-ENV LD_LIBRARY_PATH=/games/${APPID}/linux64:$LD_LIBRARY_PATH
+ENV STEAM_USER="anonymous"
+
+RUN /home/steam/install.sh
+
+FROM debian:stable-slim
 
 ENV VH_SERVER_NAME="Valheim Docker"
 ENV VH_WORLD="World"
 ENV VH_SERVER_PASSWORD=""
 ENV VH_PUBLIC="1"
+ENV APPID=896660
 
-RUN /home/steam/install.sh
+ENV LD_LIBRARY_PATH=/games/${APPID}/linux64:$LD_LIBRARY_PATH
 
-USER root
-
-RUN useradd -m -s /bin/bash -g steam valheim \
+RUN useradd -m -s /bin/bash valheim \
     && echo "valheim:valheim" | chpasswd \
     && rm -rf /data/* \
-    && mkdir -p /data \
-    && chown -R valheim:steam /data /games
+    && mkdir -p /data /games \
+    && chown -R valheim:valheim /data /games
 
 USER valheim
 
-COPY --chown=valheim:steam ./run.sh /home/valheim
+COPY --from=download --chown=valheim:valheim /games/${APPID}/ /games/${APPID}/
+COPY --chown=valheim:valheim ./run.sh /home/valheim
 
 WORKDIR /games/${APPID}/
 

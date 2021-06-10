@@ -101,8 +101,8 @@ Useful for using as a base image for any game using steam. The entrypoint by def
 
 ```
 # the user name/pass used to authenticate with steam, some games require this before you can download the dedicated server executable
-STEAMUSER="anonymous"
-STEAMPASS=""
+STEAM_USER="anonymous"
+STEAM_PASS=""
 
 APPID=<undefined>     # the app to install - see list of dedication server app IDs here: (https://developer.valvesoftware.com/wiki/Dedicated_Servers_List)
 ```

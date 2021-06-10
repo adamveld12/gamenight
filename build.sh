@@ -16,7 +16,7 @@ function build() {
   fi
 
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuilding '${imageName}'\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-  docker build --build-arg "STEAM_USER=${STEAMUSER}" --build-arg "STEAM_PASS=${STEAMPASS}" \
+  docker build --build-arg "STEAM_USER=${STEAM_USER}" --build-arg "STEAM_PASS=${STEAM_PASS}" \
               --label "maintainer=adam@vdhsn.com" \
               --label "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
               -t "${imageName}:${tag}" \

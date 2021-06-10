@@ -8,10 +8,14 @@ if [ "${VH_PUBLIC}" = "1" ]; then
     ispub="1"
 fi
 
+export _PASSWORD_ARG="-password \"${VH_SERVER_PASSWORD}\""
+if [[ -z "${VH_SERVER_PASSWORD}" ]]; then
+    _PASSWORD_ARG="-password"
+fi
+
 echo "Starting server PRESS CTRL-C to exit"
-/games/${APPID}/valheim_server.x86_64 -port 2456 -nographics -batchmode \
+exec /games/${APPID}/valheim_server.x86_64 -port 2456 -nographics -batchmode \
 -savedir /data \
--name "${VH_SERVER_NAME}" \
--password "${VH_SERVER_PASSWORD}" \
+-name "${VH_SERVER_NAME}" ${_PASSWORD_ARG} \
 -world "${VH_WORLD}" \
 -public "${ispub}"
