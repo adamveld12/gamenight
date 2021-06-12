@@ -17,8 +17,12 @@ function build() {
 
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuilding '${imageName}'\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   docker build --build-arg "STEAM_USER=${STEAM_USER}" --build-arg "STEAM_PASS=${STEAM_PASS}" \
-              --label "maintainer=adam@vdhsn.com" \
-              --label "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+               --label="org.opencontainers.image.created=$(BUILD_DATE)" \
+               --label="org.opencontainers.image.source=https://github.com/adamveld12/gamenight.git" \
+               --label="org.opencontainers.image.url=https://github.com/adamveld12/gamenight" \
+               --label="org.opencontainers.image.revision=$(COMMIT_SHA)" \
+               --label="org.opencontainers.image.licenses=MIT" \
+               --label="org.opencontainers.image.authors=Adam Veldhousen <adam@vdhsn.com>" \
               -t "${imageName}:${tag}" \
               -f "${buildDir}/${df}" \
               ${buildDir};
