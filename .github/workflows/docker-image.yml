@@ -30,8 +30,7 @@ jobs:
         STEAM_USER: anonymous
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        source ./build.sh
-        build dontstarve ${SHA}
+        echo "skipping don't starve build for now"
 
   valheim:
     runs-on: ubuntu-latest
