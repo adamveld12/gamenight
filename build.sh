@@ -1,8 +1,11 @@
 #!/bin/bash
 export BRANCH=$GITHUB_REF;
 export SHA=$(git rev-parse --short=6 HEAD);
+export BUILD_DATE=$(date --iso-8601=minutes)
 
-docker login -u adamveld12 -p ${DOCKER_PASSWORD}
+if [ ! -z "${DOCKER_PASSWORD}" ]; then
+  docker login -u adamveld12 -p ${DOCKER_PASSWORD}
+fi
 
 function build() {
   local buildDir=$1;
@@ -17,10 +20,10 @@ function build() {
 
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuilding '${imageName}'\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   docker build --build-arg "STEAM_USER=${STEAM_USER}" --build-arg "STEAM_PASS=${STEAM_PASS}" \
-               --label="org.opencontainers.image.created=$(BUILD_DATE)" \
+               --label="org.opencontainers.image.created=${BUILD_DATE}" \
                --label="org.opencontainers.image.source=https://github.com/adamveld12/gamenight.git" \
                --label="org.opencontainers.image.url=https://github.com/adamveld12/gamenight" \
-               --label="org.opencontainers.image.revision=$(COMMIT_SHA)" \
+               --label="org.opencontainers.image.revision=${SHA}" \
                --label="org.opencontainers.image.licenses=MIT" \
                --label="org.opencontainers.image.authors=Adam Veldhousen <adam@vdhsn.com>" \
               -t "${imageName}:${tag}" \
