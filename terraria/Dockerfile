@@ -24,7 +24,8 @@ RUN groupadd terraria \
   && useradd -d /games/terraria -g terraria -u 1000 -o -s /bin/bash terraria \
   && mkdir -p /games/terraria /data/configs /data/saves \
   && chmod +x /games/terraria/run.sh /games/terraria/TerrariaServer.bin.* \
-  && chown -cR terraria:terraria /games /data/configs /data/saves
+  && chown -cR terraria:terraria /games /data/ \
+  && chmod -R u=rwx,g=rwx,o=rx /data/
 
 #Sets the name of the world when using autocreate
 ENV T_WORLD_NAME "MobyWorld"
@@ -57,4 +58,4 @@ VOLUME ["/data/saves", "/data/configs"]
 EXPOSE 7777
 
 ENTRYPOINT ["/games/terraria/run.sh"]
-CMD ["-config ./serverconfig.txt"]
+CMD ["-config /data/configs/serverconfig.txt"]
