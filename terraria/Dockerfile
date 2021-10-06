@@ -22,9 +22,9 @@ RUN  unzip ../terraria.zip \
 
 RUN groupadd terraria \
   && useradd -d /games/terraria -g terraria -u 1000 -o -s /bin/bash terraria \
-  && mkdir -p /games/terraria /data \
+  && mkdir -p /games/terraria /data/configs /data/saves \
   && chmod +x /games/terraria/run.sh /games/terraria/TerrariaServer.bin.* \
-  && chown -cR terraria /games /data
+  && chown -cR terraria:terraria /games /data/configs /data/saves
 
 #Sets the name of the world when using autocreate
 ENV T_WORLD_NAME "MobyWorld"
