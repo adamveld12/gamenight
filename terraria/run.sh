@@ -7,6 +7,4 @@ else
   ./generate_config.sh
 fi
 
-ln -s /data/configs/serverconfig.txt serverconfig.txt
-
 exec /games/terraria/TerrariaServer.bin.x86_64 $@
