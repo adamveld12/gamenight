@@ -2,15 +2,15 @@
 
 if [ -z "${T_WORLD_NAME}" ]; then export T_WORLD_NAME="MobyWorld"; fi
 if [ -z "${T_MAX_PLAYERS}" ]; then export T_MAX_PLAYERS=8; fi
-if [ -z "${T_PORT}" ]; then export T_PORT=7777 fi
+if [ -z "${T_PORT}" ]; then export T_PORT=7777; fi
 if [ -z "${T_PASSWORD}" ]; then export T_WORLD_NAME=""; fi
 if [ -z "${T_MOTD}" ]; then export T_MOTD="Please don't cut the purple trees! Save the whales!"; fi
 if [ -z "${T_WORLD_SIZE}" ]; then export T_WORLD_SIZE=2; fi
-if [ -z "${T_DIFFICULTY}" ]; then export T_DIFFICULTY=0 fi
-if [ -z "${T_SECURE}" ]; then export T_SECURE=1 fi
-if [ -z "${T_LANG}" ]; then export T_SECURE="en/US" fi
+if [ -z "${T_DIFFICULTY}" ]; then export T_DIFFICULTY=0; fi
+if [ -z "${T_SECURE}" ]; then export T_SECURE=1; fi
+if [ -z "${T_LANG}" ]; then export T_SECURE="en/US"; fi
 
-cat << EOF >> /data/configs/serverconfig.txt
+cat <<EOF >> /data/configs/serverconfig.txt
 #Sets the name of the world when using autocreate
 worldname=${T_WORLD_NAME}
 
