@@ -1,23 +1,34 @@
 {
-    "_comment": "Sizes can be specified as none, very-low, low, normal, high, very-high",
-    "terrain_segmentation": "normal",
-    "water": "normal",
+    "terrain_segmentation": 0.5,
+    "water": "2",
     "width": 0,
     "height": 0,
     "starting_area": "normal",
     "peaceful_mode": false,
     "autoplace_controls":
     {
-      "trees":  {"frequency":  "normal", "size": "normal", "richness": "normal"},
-      "coal": {"frequency": "normal", "size": "normal", "richness": "normal"},
-      "copper-ore": {"frequency": "normal", "size": "normal", "richness": "normal"},
-      "crude-oil": {"frequency": "normal", "size": "normal", "richness": "normal"},
-      "enemy-base": {"frequency": "normal", "size": "normal", "richness": "normal"},
-      "iron-ore": {"frequency": "normal", "size": "normal", "richness": "normal"},
-      "stone": {"frequency": "normal", "size": "normal", "richness": "normal"},
-      "uranium-ore": {"frequency": "normal", "size": "normal", "richness": "normal"}
+        "coal": {"frequency": 1, "size": 2, "richness": 0.5},
+        "copper-ore": {"frequency": "low", "size": "normal", "richness": "high"},
+        "crude-oil": {"frequency": "normal", "size": "normal", "richness": "normal"},
+        "enemy-base": {"frequency": "normal", "size": "normal", "richness": "normal"},
+        "iron-ore": {"frequency": "normal", "size": "normal", "richness": "normal"},
+        "stone": {"frequency": "normal", "size": 0, "richness": "normal"},
+        "uranium-ore": {"frequency": "normal", "size": "none", "richness": "normal"}
     },
-  
+
+    "cliff_settings":
+    {
+        "name": "cliff",                
+        "cliff_elevation_0": 30,        
+        "cliff_elevation_interval": 20, 
+        "richness": 1                   
+    },
+
+    "property_expression_names":
+    {
+        "elevation": "0_16-elevation",
+        "temperature": "35"
+    },
     "_comment_seed": "Use null for a random seed, number for a specific seed.",
     "seed": null
-  }
+}

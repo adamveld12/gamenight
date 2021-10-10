@@ -8,17 +8,17 @@ ENV DEFAULT_SAVE_FILE=game_save
 
 
 RUN apt-get update \
-    && apt-get install -y \
-        ca-certificates \
-        curl \
-        xz-utils \
-        tar \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && groupadd -r factorio \
-    && useradd -m -s /bin/bash -g factorio factorio \
-    && echo "factorio:facorio" | chpasswd \
-    && mkdir -p /data/configs /games \
-    && chown -R factorio /games /data
+  && apt-get install -y \
+  ca-certificates \
+  curl \
+  xz-utils \
+  tar \
+  && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+  && groupadd -r factorio \
+  && useradd -m -s /bin/bash -g factorio factorio \
+  && echo "factorio:factorio" | chpasswd \
+  && mkdir -p /data/configs /games \
+  && chown -R factorio /games /data
 
 USER factorio
 WORKDIR /games/
@@ -28,14 +28,16 @@ RUN curl -L "https://www.factorio.com/get-download/${VERSION}/headless/linux64" 
   && tar -xf /games/factorio.tar \
   && rm -rf /games/factorio.tar.xz /games/factorio.tar
 
-COPY ./data /data
-COPY ./create-save.sh /games/factorio/bin/x64/
-COPY ./start.sh /games/factorio/bin/x64/
+COPY --chown=factorio:factorio ./data /data
+COPY --chown=factorio:factorio ./create-save.sh /games/factorio/bin/x64/
+COPY --chown=factorio:factorio ./start.sh /games/factorio/bin/x64/
 
-EXPOSE 34197
-EXPOSE 34198
+EXPOSE 34197/udp
+EXPOSE 34198/udp
 
 
-VOLUME ['/data/saves', '/data/configs', '/data/mods']
+VOLUME /data
 
-ENTRYPOINT ['/games/factorio/bin/x64/factorio']
+WORKDIR /games/factorio
+
+CMD ["/bin/bash", "/games/factorio/bin/x64/start.sh"]
