@@ -1,4 +1,5 @@
 {
+    "_comment_docs": "https://lua-api.factorio.com/latest/Concepts.html#MapSettings", 
     "difficulty_settings":
     {
        "recipe_difficulty": 0,

@@ -1,4 +1,4 @@
-FROM debian:9.3-slim
+FROM ubuntu:latest
 
 ARG VERSION=stable
 ENV VERSION=${VERSION}
@@ -8,11 +8,7 @@ ENV DEFAULT_SAVE_FILE=game_save
 
 
 RUN apt-get update \
-  && apt-get install -y \
-  ca-certificates \
-  curl \
-  xz-utils \
-  tar \
+  && apt-get install -y ca-certificates curl xz-utils tar \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && groupadd -r factorio \
   && useradd -m -s /bin/bash -g factorio factorio \
@@ -34,7 +30,6 @@ COPY --chown=factorio:factorio ./start.sh /games/factorio/bin/x64/
 
 EXPOSE 34197/udp
 EXPOSE 34198/udp
-
 
 VOLUME /data
 

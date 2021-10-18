@@ -1,6 +1,10 @@
 #!/bin/bash
 export GAME_SAVE_PATH=/data/saves/${DEFAULT_SAVE_FILE}.zip
 
+if ! [[ -f ${GAME_SAVE_PATH} ]]; then 
+    create-save.sh;
+fi
+
 mkdir -p /data/logs
 touch /data/logs/console.log
 
