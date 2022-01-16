@@ -19,7 +19,7 @@ RUN apt-get update \
 USER factorio
 WORKDIR /games/
 
-RUN curl -L "https://www.factorio.com/get-download/${VERSION}/headless/linux64" -o /games/factorio.tar.xz \
+RUN curl -sSL 'https://factorio.com/get-download/${VERSION}/headless/linux64' -o /games/factorio.tar.xz \
   && xz -d /games/factorio.tar.xz \
   && tar -xf /games/factorio.tar \
   && rm -rf /games/factorio.tar.xz /games/factorio.tar

@@ -9,13 +9,15 @@ fi
 
 function build() {
   local buildDir=$1;
-  local tag=$2;
-  local df=$3;
+  local tag=${2:-"latest"};
+  local df=${3:-"Dockerfile"};
+
 
   local imageName="gamenight/${buildDir}"
 
-  if [ -z "$df" ]; then
-    df="Dockerfile";
+  if [ -z "$buildDir" ]; then
+    echo "No build directory specified"
+    exit 1
   fi
 
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuilding '${imageName}'\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -24,15 +26,23 @@ function build() {
                --label="org.opencontainers.image.source=https://github.com/adamveld12/gamenight.git" \
                --label="org.opencontainers.image.url=https://github.com/adamveld12/gamenight" \
                --label="org.opencontainers.image.revision=${SHA}" \
+               --label="org.gamenight.version=${tag}" \
+               --label="org.gamenight.game-id=${buildDir}" \
                --label="org.opencontainers.image.licenses=MIT" \
                --label="org.opencontainers.image.authors=Adam Veldhousen <adam@vdhsn.com>" \
               -t "${imageName}:${tag}" \
+              -t "${imageName}:${SHA}" \
               -f "${buildDir}/${df}" \
               ${buildDir};
 
-  if [ "${BRANCH}" = "refs/heads/master" ]; then
+  if [ "${BRANCH}" = "refs/heads/master" ] && [ ! "${tag}" = "latest" ]; then
     docker tag "${imageName}:${tag}" "${imageName}:latest";
   fi
 
   docker push -a -q ${imageName};
 }
+
+
+if [ -z "$1" ]; then
+  build $1 $2 $3;
+fi

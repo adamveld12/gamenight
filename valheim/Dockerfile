@@ -1,6 +1,5 @@
 FROM gamenight/steamcmd:latest AS download
 
-
 ENV APPID=896660
 ENV STEAM_USER="anonymous"
 
@@ -32,6 +31,5 @@ WORKDIR /games/${APPID}/
 VOLUME ["/data"]
 
 EXPOSE 2456/udp 2457/udp
-
 
 ENTRYPOINT [ "/home/valheim/run.sh" ]

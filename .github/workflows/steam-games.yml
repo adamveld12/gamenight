@@ -1,0 +1,43 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  steamcmd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build steamcmd
+        env:
+          STEAM_USER: anonymous
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          .hack/build.sh steamcmd ${SHA}
+
+  dontstarve:
+    runs-on: ubuntu-latest
+    needs: [steamcmd]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build dontstarve
+        env:
+          STEAM_USER: anonymous
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          echo "skipping don't starve build for now"
+
+  valheim:
+    runs-on: ubuntu-latest
+    needs: [steamcmd]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build valheim
+        env:
+          STEAM_USER: anonymous
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          .hack/build.sh valheim 0.204.4
