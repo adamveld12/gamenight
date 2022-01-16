@@ -39,3 +39,14 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           .hack/build.sh factorio 1.1.50
+
+  dwarf_fortress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build dwarf fortress
+        env:
+          STEAM_USER: anonymous
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          .hack/build.sh dwarf_fortress 47_05
