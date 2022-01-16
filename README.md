@@ -1,21 +1,21 @@
 # Game Night
 
-[![Games CI](https://github.com/adamveld12/gamenight/actions/workflows/steam-games.yml/badge.svg)](https://github.com/adamveld12/gamenight/actions/workflows/games.yml)
-[![Steam Games CI](https://github.com/adamveld12/gamenight/actions/workflows/games.yml/badge.svg)](https://github.com/adamveld12/gamenight/actions/workflows/steam-games.yml)
+[![Games CI](https://github.com/adamveld12/gamenight/actions/workflows/games.yml/badge.svg)](https://github.com/adamveld12/gamenight/actions/workflows/games.yml)
+[![Steam Games CI](https://github.com/adamveld12/gamenight/actions/workflows/steam-games.yml/badge.svg)](https://github.com/adamveld12/gamenight/actions/workflows/steam-games.yml)
 
 A bunch of containerized dedicated servers for games I play on the reg.
 
-| Games | Docs | Latest Version |
+
+| Games | Docs | Dockerhub |
 |-|-|-|
-| Don't Starve | [README](./dontstarve/README.md) | gn-wip-latest |
-| Dwarf Fortress | [README](./dwarf_fortress/README.md) | gn-wip-latest |
-| Factorio | [README](./factorio/README.md) | 1.1.50 |
-| Minecraft | [README](./minecraft/README.md) | 1.18.1 |
-| Rust | [README](./rust/README.md) | gn-wip-latest |
-| Terraria | [README](./terraria/README.md) | 1432 |
-| Valheim | [README](./valheim/README.md) | 0.204.4 |
-
-
+| Don't Starve | [README](./dontstarve/README.md) | [![dontstarve](https://img.shields.io/docker/v/gamenight/dontstarve?label=gamenight%2Fdontstarve&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/dontstarve) |
+| Dwarf Fortress | [README](./dwarf_fortress/README.md) | [![dwarf fortress](https://img.shields.io/docker/v/gamenight/dwarf_fortress?label=gamenight%2Fdwarf_fortress&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/dwarf_fortress) |
+| Factorio | [README](./factorio/README.md) | [![factorio](https://img.shields.io/docker/v/gamenight/factorio?label=gamenight%2Ffactorio&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/factorio) |
+| Minecraft | [README](./minecraft/README.md) | [![minecraft](https://img.shields.io/docker/v/gamenight/minecraft?label=gamenight%2Fminecraft&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/minecraft) |
+| Rust | [README](./rust/README.md) | [![rust](https://img.shields.io/docker/v/gamenight/rust?label=gamenight%2Frust&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/rust) |
+| Terraria | [README](./terraria/README.md) | [![terraria](https://img.shields.io/docker/v/gamenight/terraria?label=gamenight%2Fterraria&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/terraria) |
+| Valheim | [README](./valheim/README.md) | [![valheim](https://img.shields.io/docker/v/gamenight/valheim?label=gamenight%2Fvalheim&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/valheim) |
+| SteamCMD | [README](./steamcmd/README.md) | [![steamcmd](https://img.shields.io/docker/v/gamenight/steamcmd?label=gamenight%2Fsteamcmd&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/steamcmd) |
 
 - Upcoming Games
     - Arma 3 - 233780
@@ -24,8 +24,6 @@ A bunch of containerized dedicated servers for games I play on the reg.
     - Project Zomboid - 223250
     - Killing Floor - 222860
     - Insurgency
-
-
 
 ## How to use
 

@@ -22,6 +22,7 @@ function build() {
 
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuilding '${imageName}'\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   docker build --build-arg "STEAM_USER=${STEAM_USER}" --build-arg "STEAM_PASS=${STEAM_PASS}" \
+               --build-arg "VERSION=${tag}" \
                --label="org.opencontainers.image.created=${BUILD_DATE}" \
                --label="org.opencontainers.image.source=https://github.com/adamveld12/gamenight.git" \
                --label="org.opencontainers.image.url=https://github.com/adamveld12/gamenight" \
@@ -35,14 +36,14 @@ function build() {
               -f "${buildDir}/${df}" \
               ${buildDir};
 
-  if [ "${BRANCH}" = "refs/heads/master" ] && [ ! "${tag}" = "latest" ]; then
-    docker tag "${imageName}:${tag}" "${imageName}:latest";
-  fi
+  # if [ "${BRANCH}" = "refs/heads/master" ] && [ ! "${tag}" = "latest" ]; then
+  #   docker tag "${imageName}:${tag}" "${imageName}:latest";
+  # fi
 
-  docker push -a -q ${imageName};
+  docker push -a ${imageName};
 }
 
 
-if [ -z "$1" ]; then
+if ! [ -z "$1" ]; then
   build $1 $2 $3;
 fi
