@@ -12,7 +12,6 @@ function build() {
   local tag=${2:-"latest"};
   local df=${3:-"Dockerfile"};
 
-
   local imageName="gamenight/${buildDir}"
 
   if [ -z "$buildDir" ]; then
@@ -32,13 +31,8 @@ function build() {
                --label="org.opencontainers.image.licenses=MIT" \
                --label="org.opencontainers.image.authors=Adam Veldhousen <adam@vdhsn.com>" \
               -t "${imageName}:${tag}" \
-              -t "${imageName}:${SHA}" \
               -f "${buildDir}/${df}" \
               ${buildDir};
-
-  # if [ "${BRANCH}" = "refs/heads/master" ] && [ ! "${tag}" = "latest" ]; then
-  #   docker tag "${imageName}:${tag}" "${imageName}:latest";
-  # fi
 
   docker push -a ${imageName};
 }
