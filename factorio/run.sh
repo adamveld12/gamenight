@@ -4,7 +4,7 @@ export GAME_SAVE_PATH=/data/saves/${SAVE_FILE:-world}.zip
 
 
 if ! [ -f "${GAME_SAVE_PATH}" ]; then
-    echo "No save file found, generating save `${GAME_SAVE_PATH}` with settings found in `/data/configs/{map-gen-settings,map-gen-presets}.json`";
+    echo "No save file found, generating save '${GAME_SAVE_PATH}' with settings found in '/data/configs/{map-gen-settings,map-gen-presets}.json'";
     /games/factorio/create-save.sh;
 fi
 
