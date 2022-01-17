@@ -1,7 +1,6 @@
 # Game Night
 
-[![Games CI](https://github.com/adamveld12/gamenight/actions/workflows/games.yml/badge.svg)](https://github.com/adamveld12/gamenight/actions/workflows/games.yml)
-[![Steam Games CI](https://github.com/adamveld12/gamenight/actions/workflows/steam-games.yml/badge.svg)](https://github.com/adamveld12/gamenight/actions/workflows/steam-games.yml)
+[![Master Build Releases](https://github.com/adamveld12/gamenight/actions/workflows/master_build_release.yml/badge.svg)](https://github.com/adamveld12/gamenight/actions/workflows/master_build_release.yml)
 
 A bunch of containerized dedicated servers for games I play on the reg.
 
