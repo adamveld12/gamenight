@@ -24,18 +24,16 @@ function build() {
 
   local version=$(cat "./versions.txt" | grep ${buildDir} | awk '{print $2}');
 
+  if [ -z "${version}" ]; then
+    echo "${buildDir} can not be tagged because it is not in the versions.txt file or entry is missing verion.";
+    exit 0;
+  fi
+
   case "$tag_mode" in
     "WIP")
-      if [ -z "${version}" ]; then
-        local version="dev"
-      fi
       local tag="pr-${version}-${SHA}";
       ;;
     "RELEASE")
-      if [ -z "${version}" ]; then
-        echo "${buildDir} can not be tagged because it is not in the versions.txt file or is incorrect: got ${version}";
-        exit 0;
-      fi
       local tag=${version};
       ;;
     *)
