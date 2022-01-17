@@ -49,6 +49,11 @@ For the most part all of these follow some a similar pattern:
 
 
 
+## How to develop
+
+Build an image from a folder with `.hack/build.sh <folder>`.
+Build and test locally an image from a folder with `.hack/test.sh <folder> <force>`
+
 ## License
 
 MIT

@@ -8,8 +8,7 @@ ENV VERSION="${VERSION}"
 
 RUN /home/steam/install.sh
 
-FROM debian:stable-slim
-
+FROM ubuntu:latest as server
 
 ARG VERSION="gn-wip-local"
 
@@ -23,8 +22,8 @@ ENV PUID=1000
 
 ENV LD_LIBRARY_PATH=/games/${APPID}/linux64:$LD_LIBRARY_PATH
 
-COPY --from=download /games/${APPID}/ /games/${APPID}/
-COPY  ./run.sh /games/${APPID}/
+COPY --from=download /games/${APPID}/ /games/valheim/
+COPY  ./run.sh /games/valheim/
 
 WORKDIR /data
 
@@ -32,4 +31,4 @@ VOLUME /data
 
 EXPOSE 2456/udp 2457/udp
 
-ENTRYPOINT /games/${APPID}/run.sh
+ENTRYPOINT /games/valheim/run.sh
