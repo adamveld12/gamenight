@@ -9,8 +9,10 @@ fi
 
 function build() {
   local buildDir=$1;
-  local tag=${2:-"latest"};
-  local df=${3:-"Dockerfile"};
+
+  # WIP = only build
+  # RELEASE = build and tag with the versions.txt, and then push
+  local tag_mode=${2:-"WIP"};
 
   local imageName="gamenight/${buildDir}";
 
@@ -19,9 +21,34 @@ function build() {
     exit 1;
   fi
 
+
+  local version=$(cat "./versions.txt" | grep ${buildDir} | awk '{print $2}');
+
+  case "$tag_mode" in
+    "WIP")
+      if [ -z "${version}" ]; then
+        local version="dev"
+      fi
+      local tag="pr-${version}-${SHA}";
+      ;;
+    "RELEASE")
+      if [ -z "${version}" ]; then
+        echo "${buildDir} can not be tagged because it is not in the versions.txt file or is incorrect: got ${version}";
+        exit 0;
+      fi
+      local tag=${version};
+      ;;
+    *)
+      echo "Unknown tag mode, should be WIP or RELEASE: ${tag_mode}";
+      exit 1;
+      ;;
+  esac
+
+  echo "Detected ${buildDir} version: ${version}";
+
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuilding '${imageName}'\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   docker build --build-arg "STEAM_USER=${STEAM_USER}" --build-arg "STEAM_PASS=${STEAM_PASS}" \
-               --build-arg "VERSION=${tag}" \
+               --build-arg "VERSION=${version}" \
                --label="org.opencontainers.image.created=${BUILD_DATE}" \
                --label="org.opencontainers.image.source=https://github.com/adamveld12/gamenight.git" \
                --label="org.opencontainers.image.url=https://github.com/adamveld12/gamenight" \
@@ -31,14 +58,20 @@ function build() {
                --label="org.opencontainers.image.licenses=MIT" \
                --label="org.opencontainers.image.authors=Adam Veldhousen <adam@vdhsn.com>" \
               -t "${imageName}:${tag}" \
-              -f "${buildDir}/${df}" \
+              -t "${imageName}:${SHA}" \
+              -t "${imageName}:latest" \
+              -f "${buildDir}/Dockerfile" \
               ${buildDir};
 
-  if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
-      docker push -a ${imageName};
+  if [ "${tag_mode}" = "RELEASE" ]; then
+    echo "Releasing ${imageName}:${tag}";
+    docker push "${imageName}:${SHA}";
+    docker push "${imageName}:latest";
+    sleep 2;
+    docker push "${imageName}:${tag}";
   fi;
 }
 
 if ! [ -z "$1" ]; then
-  build $1 $2 $3;
+  build $1 $2;
 fi

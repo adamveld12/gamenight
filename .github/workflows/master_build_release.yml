@@ -1,0 +1,53 @@
+name: Master Build and Publish Release
+
+on:
+  push:
+    branches: [master, trunk]
+    paths:
+      - "versions.txt"
+jobs:
+  build-non-steam:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        game:
+          - "minecraft"
+          - "terraria"
+          - "factorio"
+          - "dwarf_fortress"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and Release ${{ matrix.game }}
+        env:
+          STEAM_USER: anonymous
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          .hack/build.sh ${{ matrix.game }} RELEASE
+  steamcmd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build SteamCMD
+        env:
+          STEAM_USER: anonymous
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          .hack/build.sh steamcmd RELEASE
+  build-steam:
+    runs-on: ubuntu-latest
+    needs: [steamcmd]
+    strategy:
+      matrix:
+        game:
+          - "valheim"
+          # - "rust"
+          # - "dontstarve"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and Release ${{ matrix.game }}
+        env:
+          STEAM_USER: anonymous
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          .hack/build.sh ${{ matrix.game }} RELEASE
+---
