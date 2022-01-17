@@ -40,8 +40,8 @@ jobs:
       matrix:
         game:
           - "valheim"
-          - "rust"
-          - "dontstarve"
+          # - "rust"
+          # - "dontstarve"
     steps:
       - uses: actions/checkout@v2
       - name: Build and Release ${{ matrix.game }}
