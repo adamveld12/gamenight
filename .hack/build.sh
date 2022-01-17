@@ -12,11 +12,11 @@ function build() {
   local tag=${2:-"latest"};
   local df=${3:-"Dockerfile"};
 
-  local imageName="gamenight/${buildDir}"
+  local imageName="gamenight/${buildDir}";
 
   if [ -z "$buildDir" ]; then
-    echo "No build directory specified"
-    exit 1
+    echo "No build directory specified";
+    exit 1;
   fi
 
   echo -e "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nBuilding '${imageName}'\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -34,9 +34,10 @@ function build() {
               -f "${buildDir}/${df}" \
               ${buildDir};
 
-  docker push -a ${imageName};
+  if [ "${GITHUB_REF}" = "refs/heads/master" ]; then
+      docker push -a ${imageName};
+  fi;
 }
-
 
 if ! [ -z "$1" ]; then
   build $1 $2 $3;
