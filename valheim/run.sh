@@ -13,9 +13,20 @@ if [[ -z "${VH_SERVER_PASSWORD}" ]]; then
     _PASSWORD_ARG="-password"
 fi
 
-echo "Starting server PRESS CTRL-C to exit"
-exec /games/${APPID}/valheim_server.x86_64 -port 2456 -nographics -batchmode \
--savedir /data \
--name "${VH_SERVER_NAME}" ${_PASSWORD_ARG} \
--world "${VH_WORLD}" \
--public "${ispub}"
+if [ -z "$(cat /etc/group | grep ${PGID})"  ]; then
+    addgroup -g ${PGID} valheim;
+fi
+
+if [ -z "$(cat /etc/passwd | grep ${PUID})"  ]; then
+    adduser -u ${PUID} -G valheim -D -h /data valheim;
+fi
+
+chown -R ${PUID}:${PGID} /data;
+chown -R ${PUID}:${PGID} /games;
+
+exec su valheim -c "/games/${APPID}/valheim_server.x86_64  -nographics -batchmode \
+                                                           -savedir /data \
+                                                           -port 2456 \
+                                                           -name \"${VH_SERVER_NAME}\" ${_PASSWORD_ARG}  \
+                                                           -world \"${VH_WORLD}\"  \
+                                                           -public \"${ispub}\""
