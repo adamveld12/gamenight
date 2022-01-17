@@ -1,0 +1,6 @@
+minecraft 1.18.1
+terraria 1423
+valheim 0.206.5
+factorio 1.1.50
+dwarf_fortress 47_05
+steamcmd latest

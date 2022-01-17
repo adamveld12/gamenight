@@ -1,17 +1,23 @@
 FROM gamenight/steamcmd:latest AS download
 
+ARG VERSION="gn-wip-local"
+
 ENV APPID=896660
 ENV STEAM_USER="anonymous"
+ENV VERSION="${VERSION}"
 
 RUN /home/steam/install.sh
 
 FROM debian:stable-slim
 
+
+ARG VERSION="gn-wip-local"
+
+ENV VERSION="${VERSION}"
 ENV VH_SERVER_NAME="Valheim Docker"
 ENV VH_WORLD="World"
 ENV VH_SERVER_PASSWORD=""
 ENV VH_PUBLIC="1"
-ENV APPID=896660
 ENV PGID=1000
 ENV PUID=1000
 
