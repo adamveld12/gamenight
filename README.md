@@ -7,14 +7,14 @@ A bunch of containerized dedicated servers for games I play on the reg.
 
 | Games | Docs | Dockerhub |
 |-|-|-|
-| Don't Starve | [README](./dontstarve/README.md) | [![dontstarve](https://img.shields.io/docker/v/gamenight/dontstarve?label=gamenight%2Fdontstarve&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/dontstarve) |
-| Dwarf Fortress | [README](./dwarf_fortress/README.md) | [![dwarf fortress](https://img.shields.io/docker/v/gamenight/dwarf_fortress?label=gamenight%2Fdwarf_fortress&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/dwarf_fortress) |
-| Rust | [README](./rust/README.md) | [![rust](https://img.shields.io/docker/v/gamenight/rust?label=gamenight%2Frust&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/rust) |
-| Valheim | [README](./valheim/README.md) | [![valheim](https://img.shields.io/docker/v/gamenight/valheim?label=gamenight%2Fvalheim&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/valheim) |
-| Factorio | [README](./factorio/README.md) | [![factorio](https://img.shields.io/docker/v/gamenight/factorio?label=gamenight%2Ffactorio&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/factorio) |
-| Minecraft | [README](./minecraft/README.md) | [![minecraft](https://img.shields.io/docker/v/gamenight/minecraft?label=gamenight%2Fminecraft&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/minecraft) |
-| Terraria | [README](./terraria/README.md) | [![terraria](https://img.shields.io/docker/v/gamenight/terraria?label=gamenight%2Fterraria&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/terraria) |
-| SteamCMD | [README](./steamcmd/README.md) | [![steamcmd](https://img.shields.io/docker/v/gamenight/steamcmd?label=gamenight%2Fsteamcmd&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/steamcmd) |
+| Don't Starve | [README](./dontstarve/README.md) | [![dontstarve](https://img.shields.io/docker/v/gamenight/dontstarve?label=gamenight%2Fdontstarve&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/dontstarve/tags?page=1&ordering=last_updated) |
+| Dwarf Fortress | [README](./dwarf_fortress/README.md) | [![dwarf fortress](https://img.shields.io/docker/v/gamenight/dwarf_fortress?label=gamenight%2Fdwarf_fortress&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/dwarf_fortress/tags?page=1&ordering=last_updated) |
+| Rust | [README](./rust/README.md) | [![rust](https://img.shields.io/docker/v/gamenight/rust?label=gamenight%2Frust&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/rust/tags?page=1&ordering=last_updated) |
+| Valheim | [README](./valheim/README.md) | [![valheim](https://img.shields.io/docker/v/gamenight/valheim?label=gamenight%2Fvalheim&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/valheim/tags?page=1&ordering=last_updated) |
+| Factorio | [README](./factorio/README.md) | [![factorio](https://img.shields.io/docker/v/gamenight/factorio?label=gamenight%2Ffactorio&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/factorio/tags?page=1&ordering=last_updated) |
+| Minecraft | [README](./minecraft/README.md) | [![minecraft](https://img.shields.io/docker/v/gamenight/minecraft?label=gamenight%2Fminecraft&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/minecraft/tags?page=1&ordering=last_updated) |
+| Terraria | [README](./terraria/README.md) | [![terraria](https://img.shields.io/docker/v/gamenight/terraria?label=gamenight%2Fterraria&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/terraria/tags?page=1&ordering=last_updated) |
+| SteamCMD | [README](./steamcmd/README.md) | [![steamcmd](https://img.shields.io/docker/v/gamenight/steamcmd?label=gamenight%2Fsteamcmd&sort=date&style=for-the-badge)](https://hub.docker.com/r/gamenight/steamcmd/tags?page=1&ordering=last_updated) |
 
 - Upcoming Games
     - Arma 3 - 233780
