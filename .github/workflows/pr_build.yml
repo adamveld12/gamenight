@@ -16,7 +16,7 @@ jobs:
           - "dwarf_fortress"
     steps:
       - uses: actions/checkout@v2
-      - name: Build and Release ${{ matrix.game }}
+      - name: Build ${{ matrix.game }}
         env:
           STEAM_USER: anonymous
         run: |
@@ -41,7 +41,7 @@ jobs:
           - "dontstarve"
     steps:
       - uses: actions/checkout@v2
-      - name: Build and Release ${{ matrix.game }}
+      - name: Build ${{ matrix.game }}
         env:
           STEAM_USER: anonymous
         run: |
