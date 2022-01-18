@@ -21,8 +21,7 @@ ENV PUID=1000
 ENV SAVE_FILE=world
 
 COPY --from=builder /games/factorio/ /games/factorio/
-COPY ./data /data
-COPY ./create-save.sh /games/factorio/
+COPY ./configs /configs
 COPY ./run.sh /games/factorio/
 
 WORKDIR /data
