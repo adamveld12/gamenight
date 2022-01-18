@@ -10,9 +10,6 @@ RUN /home/steam/install.sh
 
 FROM ubuntu:latest as server
 
-ARG VERSION="gn-wip-local"
-
-ENV VERSION="${VERSION}"
 ENV VH_SERVER_NAME="Valheim Docker"
 ENV VH_WORLD="World"
 ENV VH_SERVER_PASSWORD=""
@@ -20,9 +17,9 @@ ENV VH_PUBLIC="1"
 ENV PGID=1000
 ENV PUID=1000
 
-ENV LD_LIBRARY_PATH=/games/${APPID}/linux64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/games/valheim/linux64:$LD_LIBRARY_PATH
 
-COPY --from=download /games/${APPID}/ /games/valheim/
+COPY --from=download /games/896660/ /games/valheim/
 COPY  ./run.sh /games/valheim/
 
 WORKDIR /data
