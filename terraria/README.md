@@ -21,4 +21,4 @@ Dedicated server for Terraria
 ## Volumes
 
 - `/data/saves`: game saves
-- `/data/configs/serverconfig.txt`: https://terraria.fandom.com/wiki/Server#Server_config_file
+- `/configs/serverconfig.txt`: https://terraria.fandom.com/wiki/Server#Server_config_file

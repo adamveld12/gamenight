@@ -1,31 +1,19 @@
-FROM debian:9.6-slim
+FROM ubuntu:latest as builder
 
 ARG VERSION=1423
 
-ENV VERSION=${VERSION}
-
 WORKDIR /games/terraria
 
-
-ADD  https://terraria.org/api/download/pc-dedicated-server/terraria-server-${VERSION}.zip  /games/terraria.zip
-COPY ./data /data
-COPY ./run.sh /games/terraria/run.sh
-COPY ./generate_config.sh /games/terraria/generate_config.sh
+ADD https://terraria.org/api/download/pc-dedicated-server/terraria-server-${VERSION}.zip  /games/terraria.zip
 
 RUN apt-get update \
   && apt-get install -y unzip \
   && apt-get clean
 
 RUN  unzip ../terraria.zip \
-  && cp -R ${VERSION}/Linux/* /games/terraria \
-  && rm -rf ${VERSION} terraria.zip
+  && cp -R ${VERSION}/Linux/* /games/terraria
 
-RUN groupadd terraria \
-  && useradd -d /games/terraria -g terraria -u 1000 -o -s /bin/bash terraria \
-  && mkdir -p /games/terraria /data/configs /data/saves \
-  && chmod +x /games/terraria/run.sh /games/terraria/TerrariaServer.bin.* \
-  && chown -cR terraria:terraria /games /data/ \
-  && chmod -R u=rwx,g=rwx,o=rx /data/
+FROM ubuntu:latest as server
 
 #Sets the name of the world when using autocreate
 ENV T_WORLD_NAME "MobyWorld"
@@ -51,11 +39,14 @@ ENV T_SECURE 1
 #Sets the server language from its language code.  en/US = English de/DE = German it/IT = Italian fr/FR = French es/ES = Spanish ru/RU = Russian zh/Hans = Chinese pt/BR = Portuguese pl/PL = Polish
 ENV T_LANG "en/US"
 
-USER terraria
+ENV PUID 1000
+ENV PGID 1000
 
-VOLUME ["/data/saves", "/data/configs"]
+COPY --from=builder /games/ /games/
+COPY ./run.sh /games/terraria/run.sh
+
+VOLUME "/data"
 
 EXPOSE 7777
 
-ENTRYPOINT ["/games/terraria/run.sh"]
-CMD ["-config /data/configs/serverconfig.txt"]
+ENTRYPOINT /games/terraria/run.sh
