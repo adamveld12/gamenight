@@ -1,6 +1,6 @@
 steamcmd latest
-minecraft 1.18.1
-factorio 1.1.55
-valheim 0.206.5
-terraria 1423
+minecraft 1.18.2
+factorio 1.1.59
+valheim 0.208.1
+terraria 1436
 dwarf_fortress 47_05
