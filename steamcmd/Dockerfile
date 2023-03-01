@@ -1,4 +1,4 @@
-FROM debian:8-slim
+FROM ubuntu:22.04
 
 RUN dpkg --add-architecture i386 \
     && apt-get update \

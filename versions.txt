@@ -4,3 +4,4 @@ factorio 1.1.59
 valheim 0.208.1
 terraria 1436
 dwarf_fortress 47_05
+satisfactory latest
