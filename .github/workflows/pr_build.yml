@@ -42,7 +42,15 @@ jobs:
           # - "dontstarve"
     steps:
       - uses: actions/checkout@v2
-      - name: Build ${{ matrix.game }}
+      - name: Check for image changes
+        uses: getsentry/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            src:
+              - ${{ matrix.game }}/**
+      - if: steps.changes.outputs.src == 'true'
+        name: Build ${{ matrix.game }}
         env:
           STEAM_USER: anonymous
         run: |
