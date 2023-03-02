@@ -5,9 +5,7 @@ RUN dpkg --add-architecture i386 \
     && apt-get install -y \
     ca-certificates \
     curl \
-    lib32gcc1 \
-    libstdc++6 \
-    libstdc++6:i386 \
+    lib32gcc-s1 \
     sudo \
     tar \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
