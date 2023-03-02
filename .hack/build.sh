@@ -58,7 +58,11 @@ function build() {
               -t "${imageName}:${tag}" \
               -t "${imageName}:${SHA}" \
               -t "${imageName}:latest" \
+              -t "ghcr.io/${imageName}:${tag}" \
+              -t "ghcr.io/${imageName}:${SHA}" \
+              -t "ghcr.io/${imageName}:latest" \
               -f "${buildDir}/Dockerfile" \
+
               ${buildDir};
 
   if [ "${tag_mode}" = "RELEASE" ]; then
