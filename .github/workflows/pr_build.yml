@@ -37,6 +37,7 @@ jobs:
       matrix:
         game:
           - "valheim"
+          - "satisfactory"
           # - "rust"
           # - "dontstarve"
     steps:
