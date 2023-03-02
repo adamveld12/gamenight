@@ -69,7 +69,6 @@ function build() {
     echo "Releasing ${imageName}:${tag}";
     docker push "${imageName}:${SHA}";
     docker push "${imageName}:latest";
-    sleep 2;
     docker push "${imageName}:${tag}";
   fi;
 }

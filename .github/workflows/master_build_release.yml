@@ -2,7 +2,7 @@ name: Master Build and Publish Release
 
 on:
   push:
-    branches: [master, satisfactory]
+    branches: [master]
     paths:
       - "versions.txt"
 jobs:

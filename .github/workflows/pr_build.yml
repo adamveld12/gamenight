@@ -2,7 +2,7 @@ name: PR Build WIP
 
 on:
   pull_request:
-    branches: [master, trunk]
+    branches: [master]
 
 jobs:
   steamcmd:
