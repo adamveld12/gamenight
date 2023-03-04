@@ -1,31 +1,30 @@
-FROM debian:9.6-slim
+FROM docker.io/ubuntu:latest as download
 
 ARG VERSION=1436
 
-ENV VERSION=${VERSION}
-
 WORKDIR /games/terraria
 
-
-ADD  https://terraria.org/api/download/pc-dedicated-server/terraria-server-${VERSION}.zip  /games/terraria.zip
-COPY ./data /data
-COPY ./run.sh /games/terraria/run.sh
-COPY ./generate_config.sh /games/terraria/generate_config.sh
+ADD https://terraria.org/api/download/pc-dedicated-server/terraria-server-${VERSION}.zip  /games/terraria.zip
 
 RUN apt-get update \
   && apt-get install -y unzip \
-  && apt-get clean
+  && unzip ../terraria.zip \
+  && cp -R ${VERSION}/Linux/* /games/terraria
 
-RUN  unzip ../terraria.zip \
-  && cp -R ${VERSION}/Linux/* /games/terraria \
-  && rm -rf ${VERSION} terraria.zip
+FROM docker.io/ubuntu:latest
 
-RUN groupadd terraria \
-  && useradd -d /games/terraria -g terraria -u 1000 -o -s /bin/bash terraria \
-  && mkdir -p /games/terraria /data/configs /data/saves \
-  && chmod +x /games/terraria/run.sh /games/terraria/TerrariaServer.bin.* \
-  && chown -cR terraria:terraria /games /data/ \
-  && chmod -R u=rwx,g=rwx,o=rx /data/
+WORKDIR /games/terraria
+
+RUN useradd -d /games/terraria -u 1000 -o -s /bin/bash terraria
+
+COPY --from=download \
+	 --chown=terraria:terraria /games/terraria/* /games/terraria/
+COPY --chown=terraria:terraria ./run.sh /games/terraria/run.sh
+COPY --chown=terraria:terraria ./generate_config.sh /games/terraria/generate_config.sh
+COPY --chown=terraria:terraria ./data /data
+
+RUN chmod +x /games/terraria/run.sh /games/terraria/TerrariaServer.bin.* \
+	&& chown -Rv terraria:terraria /games/terraria /data
 
 #Sets the name of the world when using autocreate
 ENV T_WORLD_NAME "MobyWorld"

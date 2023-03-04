@@ -58,6 +58,9 @@ function build() {
               -t "${imageName}:${tag}" \
               -t "${imageName}:${SHA}" \
               -t "${imageName}:latest" \
+              -t "ghcr.io/${imageName}:${tag}" \
+              -t "ghcr.io/${imageName}:${SHA}" \
+              -t "ghcr.io/${imageName}:latest" \
               -f "${buildDir}/Dockerfile" \
               ${buildDir};
 
@@ -65,7 +68,6 @@ function build() {
     echo "Releasing ${imageName}:${tag}";
     docker push "${imageName}:${SHA}";
     docker push "${imageName}:latest";
-    sleep 2;
     docker push "${imageName}:${tag}";
   fi;
 }
