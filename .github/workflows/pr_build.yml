@@ -2,11 +2,30 @@ name: PR Build WIP
 
 on:
   pull_request:
-    branches: [master, trunk]
+    branches: [master]
 
 jobs:
-  build-non-steam:
+  steamcmd:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build SteamCMD
+        uses: docker/build-push-action@v3
+        env:
+          STEAM_USER: anonymous
+        with:
+          context: ./steamcmd
+          platforms: linux/amd64
+          push: false
+          tags: |
+            docker.io/gamenight/steamcmd:wip-latest
+            docker.io/gamenight/steamcmd:${{ github.sha }}
+            ghcr.io/${{ github.repository }}/steamcmd:wip-latest
+            ghcr.io/${{ github.repository }}/steamcmd:${{ github.sha }}
+
+  build-game-servers:
+    runs-on: ubuntu-latest
+    needs: [steamcmd]
     strategy:
       matrix:
         game:
@@ -14,34 +33,21 @@ jobs:
           - "terraria"
           - "factorio"
           - "dwarf_fortress"
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build ${{ matrix.game }}
-        env:
-          STEAM_USER: anonymous
-        run: |
-          .hack/build.sh ${{ matrix.game }} WIP
-  steamcmd:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build SteamCMD
-        env:
-          STEAM_USER: anonymous
-        run: |
-          .hack/build.sh steamcmd WIP
-  build-steam:
-    runs-on: ubuntu-latest
-    needs: [steamcmd]
-    strategy:
-      matrix:
-        game:
           - "valheim"
+          - "satisfactory"
           # - "rust"
           # - "dontstarve"
     steps:
       - uses: actions/checkout@v2
-      - name: Build ${{ matrix.game }}
+      - name: Check for image changes
+        uses: getsentry/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            src:
+              - ${{ matrix.game }}/**
+      - if: steps.changes.outputs.src == 'true'
+        name: Build ${{ matrix.game }}
         env:
           STEAM_USER: anonymous
         run: |
