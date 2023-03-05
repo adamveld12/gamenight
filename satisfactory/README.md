@@ -2,7 +2,7 @@
 
 See [Configuration file reference](https://satisfactory.fandom.com/wiki/Dedicated_servers/Configuration_files)
 
-After the server is up, connect to it via Satisfactory's Server Manager and claim it, then follow the on screen prompts.
+After the server is up, connect to it via Satisfactory's in-game Server Manager and claim it, then follow the on screen prompts.
 
 ## Ports
 
@@ -12,6 +12,5 @@ After the server is up, connect to it via Satisfactory's Server Manager and clai
 
 ## Volumes
 
-- `/data/saves`: game saves
-- `/configs/`: game configs
+- `/data`: game saves and config
 
