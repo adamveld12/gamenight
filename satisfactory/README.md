@@ -13,4 +13,3 @@ After the server is up, connect to it via Satisfactory's in-game Server Manager 
 ## Volumes
 
 - `/data`: game saves and config
-
