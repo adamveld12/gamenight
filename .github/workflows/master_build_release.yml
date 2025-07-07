@@ -44,8 +44,8 @@ jobs:
         game:
           - "minecraft"
           - "terraria"
-          - "factorio"
           - "valheim"
+          # - "factorio"
           # - "satisfactory"
           # - "dwarf_fortress"
           # - "rust"
