@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export APP_COMMAND="+force_install_dir /games/$APPID/ +app_update $APPID validate"
+export APP_COMMAND="+app_update $APPID validate"
 if [[ -z "$APPID" ]]; then
   APP_COMMAND=""
 fi;
@@ -17,4 +17,5 @@ fi;
 
 exec /home/steam/Steam/steamcmd.sh \
       +@sSteamCmdForcePlatformType linux \
+      +force_install_dir /games/$APPID/ \
       ${LOGIN_COMMAND} ${APP_COMMAND} +exit;

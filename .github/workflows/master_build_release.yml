@@ -44,9 +44,9 @@ jobs:
           - "minecraft"
           - "terraria"
           - "factorio"
-          - "dwarf_fortress"
           - "valheim"
-          - "satisfactory"
+          # - "satisfactory"
+          # - "dwarf_fortress"
           # - "rust"
           # - "dontstarve"
     steps:

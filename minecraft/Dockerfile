@@ -1,27 +1,33 @@
-FROM openjdk:17-alpine
+FROM alpine/java:21-jdk
 
-ARG VERSION=1.18.2
+ARG VERSION=1.21.7
+ARG MINECRAFT_SERVER_URL=https://fill-data.papermc.io/v1/objects/9adbd99ce7b42c9f0cb205686d83f0208a93fa6d215bb28196e12d0aaf49c2d8/paper-1.21.7-17.jar
 
-ARG MINECRAFT_VERSION_HASH=c8f83c5655308435b3dcf03c06d9fe8740a77469
+LABEL org.opencontainers.image.authors="adam@vdhsn.com"
+LABEL org.opencontainers.image.source=""
+LABEL org.opencontainers.image.documentation=""
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.title="Gamenight Minecraft Server"
+LABEL org.opencontainers.image.description="A Minecraft server running PaperMC with Aikar's flags."
+LABEL org.opencontainers.image.vendor="VDHSN"
+LABEL org.opencontainers.image.version=${VERSION}
+
 ENV VERSION=${VERSION}
-ENV JAVA_OPTS=-XX:+UseG1GC
-ENV PATH=${PATH}:/usr/lib/jvm/default-java/bin
+ENV JAVA_OPTS="-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
+ENV JVM_MEMORY_SIZE=1024M
 
-ENV JVM_MEMORY_SIZE=1024m
-ENV PUID=1000
-ENV PGID=1000
+RUN addgroup -g 1000 minecraft \
+	&& adduser -D -u 1000 -G minecraft minecraft \
+	&& apk add --no-cache sudo
 
-ADD https://launcher.mojang.com/v1/objects/${MINECRAFT_VERSION_HASH}/server.jar /games/minecraft/server.jar
+COPY --chown=minecraft:minecraft ./run.sh /games/minecraft/
+COPY --chown=minecraft:minecraft ./data/configs/ /configs/
 
-RUN apk add --no-cache --purge sudo
-
-COPY ./run.sh /games/minecraft/
-COPY ./data/configs/server.properties /configs/server.properties
+ADD --chown=minecraft:minecraft ${MINECRAFT_SERVER_URL} /games/minecraft/server.jar
 
 EXPOSE 25565 25575
 
 WORKDIR /data
-
 VOLUME /data
 
-ENTRYPOINT /games/minecraft/run.sh
+CMD ["/games/minecraft/run.sh"]

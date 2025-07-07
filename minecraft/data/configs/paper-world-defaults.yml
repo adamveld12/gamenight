@@ -1,0 +1,25 @@
+chunks:
+  delay-chunk-unloads-by: 0s
+  max-auto-save-chunks-per-tick: 200
+collisions:
+  allow-player-cramming-damage: true
+  max-entity-collisions: 2147483647
+entities:
+  behavior:
+    only-merge-items-horizontally: true
+    phantoms-do-not-spawn-on-creative-players: false
+    phantoms-only-attack-insomniacs: false
+    cooldown-failed-beehive-releases: false
+  spawning:
+    count-all-mobs-for-spawning: true
+    duplicate-uuid:
+      mode: NOTHING
+    filter-bad-tile-entity-nbt-from-falling-blocks: false
+    filtered-entity-tag-nbt-paths: []
+    per-player-mob-spawns: false
+hopper:
+  cooldown-when-full: false
+maps:
+  item-frame-cursor-limit: 2147483647
+scoreboards:
+  use-vanilla-world-scoreboard-name-coloring: true

@@ -17,15 +17,22 @@ ENV VH_PUBLIC="1"
 ENV PGID=1000
 ENV PUID=1000
 
-ENV LD_LIBRARY_PATH=/games/valheim/linux64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/games/valheim/linux64
 
-COPY --from=download /games/896660/ /games/valheim/
-COPY  ./run.sh /games/valheim/
+RUN useradd -u 1000 -o -s /bin/bash -d /data valheim
 
-WORKDIR /data
+COPY --from=download \
+	 --chown=valheim:valheim /games/896660/ /games/valheim/
+
+COPY --chown=valheim:valheim ./run.sh /games/valheim/
+
 
 VOLUME /data
 
 EXPOSE 2456/udp 2457/udp
 
-ENTRYPOINT /games/valheim/run.sh
+USER valheim
+
+WORKDIR /data
+
+ENTRYPOINT ["/games/valheim/run.sh"]
