@@ -1,0 +1,11 @@
+world-settings:
+  default:
+    entity-activation-range:
+      animals: 0
+      flying-monsters: 0
+      misc: 0
+      monsters: 0
+      raiders: 0
+      villagers: 0
+      water: 0
+    max-tnt-per-tick: -1

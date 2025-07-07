@@ -1,0 +1,22 @@
+commands:
+  suggest-player-names-when-null-tab-completions: false
+  time-command-affects-all-worlds: true
+  item-validation:
+    display-name: 2147483647
+    lore-line: 2147483647
+    resolve-selectors-in-books: true
+    book:
+      author: 2147483647
+      page: 2147483647
+      title: 2147483647
+    book-size:
+      page-max: disabled
+  misc:
+    fix-entity-position-desync: false
+    max-joins-per-tick: 2147483647
+  packet-limiter:
+    all-packets:
+      interval: 0.000001
+      max-packet-rate: 999999.0
+  spam-limiter:
+    incoming-packet-threshold: 2147483647
