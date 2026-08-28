@@ -1,7 +1,7 @@
-FROM alpine/java:21-jdk
-
-ARG VERSION=1.21.7
-ARG MINECRAFT_SERVER_URL=https://fill-data.papermc.io/v1/objects/9adbd99ce7b42c9f0cb205686d83f0208a93fa6d215bb28196e12d0aaf49c2d8/paper-1.21.7-17.jar
+FROM eclipse-temurin:26.0.2_10-jdk-alpine-3.24
+ARG VERSION=26.2
+# https://papermc.io/downloads/paper
+ARG MINECRAFT_SERVER_URL=https://fill-data.papermc.io/v1/objects/a8c9140c3075bd7c04973e9cdc491b21bfe6bad472b674ef932a4ae0fec19629/paper-26.2-119.jar
 
 LABEL org.opencontainers.image.authors="adam@vdhsn.com"
 LABEL org.opencontainers.image.source=""
@@ -13,6 +13,7 @@ LABEL org.opencontainers.image.vendor="VDHSN"
 LABEL org.opencontainers.image.version=${VERSION}
 
 ENV VERSION=${VERSION}
+# GC Args: https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft/
 ENV JAVA_OPTS="-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
 ENV JVM_MEMORY_SIZE=1024M
 
