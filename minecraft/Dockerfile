@@ -22,7 +22,7 @@ RUN addgroup -g 1000 minecraft \
 	&& apk add --no-cache sudo
 
 COPY --chown=minecraft:minecraft ./run.sh /games/minecraft/
-COPY --chown=minecraft:minecraft ./data/configs/ /configs/
+COPY --chown=minecraft:minecraft ./data/configs/ /config/
 
 ADD --chown=minecraft:minecraft ${MINECRAFT_SERVER_URL} /games/minecraft/server.jar
 

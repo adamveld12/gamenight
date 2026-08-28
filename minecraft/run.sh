@@ -5,13 +5,13 @@ cat <<EOF > /data/eula.txt
 eula=true
 EOF
 
-mkdir -p '/data/configs' '/data/world' '/data/plugins';
+mkdir -p '/data/config' '/data/world' '/data/plugins';
 
 chown -R minecraft:minecraft /data;
 
-CONFIG_FILES=$(find /configs -type f -name '*.properties' -o -name '*.yml')
+CONFIG_FILES=$(find /config -type f -name '*.properties' -o -name '*.yml')
 for file in ${CONFIG_FILES}; do
-    cp -vf "${file}" /data/configs/;
+    cp -vf "${file}" /data/;
 done
 
 
